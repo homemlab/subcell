@@ -12,8 +12,8 @@ This program relies on two pieces of software previously developed for manipulat
 ## **Installation**
 Running the script requires **Anaconda** (or Miniconda) to be installed. If you run the following snippet everything should go fine:
 ```console
-$ git clone REPO
-$ cd REPO
+$ git clone https://github.com/homemlab/subcell.git
+$ cd subcell/
 $ conda env create -f env.yaml
 $ conda activate subcell
 ```
