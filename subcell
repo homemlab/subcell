@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+
+echo -e "$0 0.3
+retrieve cell specific fastq reads from provided list of cell barcodes from single-cell RNA-seq data
+(e.g. retrieved using WhichCell function of Seurat R package)
+
+contact: ricardo.santos@nms.unl.pt
+------------------------------------------------
+"
+
+# Input file with cell barcodes
+input=$(readlink -f $1)
+outfile=$(echo $1 | awk -F'[/]' '{print$(NF)}' | sed 's/\(.*\)\..*/\1/')
+# Directory with the I1 R1 R2 fastq read files
+dir=$(readlink -f $2)
+cd $dir
+
+# Get cell barcodes (CB)
+# This is from our special case scRNA-seq experiment.
+# Seurat filtered cell types contain the CBs in the following format:
+# sample{1,2}-<Barcode>_1
+# The following sed commands remove the non nucleotide info
+
+sed 's/^.*\(_.*-\).*$/\1/' $input | sed 's/-\|_//g' > "$outfile".tmp
+
+# Extract reads that belong to the cell barcode
+
+readlink -f $(ls *.fastq.gz) > files.txt
+if [[ $(ls *.fastq.gz | wc -l) == 0 ]]; then
+    echo -e "Directory does not contain the required R1/R2 read files.
+    Please provide the correct directory or make sure .fastq.gz files are compressed"
+else
+    if [[ $(ls *.fastq.gz | grep -E '*_R(1|2)_*' | wc -l) == 0 ]]; then
+        echo -e "Directory does not contain the required R1/R2 read files.
+        Please provide the correct directory or make sure .fastq.gz files are compressed"
+    else
+        while read l
+        do
+            if ! [[ $(echo $l | grep -E '*_R1_*') == "" ]]; then
+                echo $l
+                fqtools find -f "$outfile".tmp "$l" | awk '/^@/ {print $0}' | sed 's/@//g' | sed 's/\ 1:/\ 2:/g' > "$outfile".head
+                wait
+                l2=$(echo $l | sed 's/_R1_/_R2_/g')
+                echo "$l2"
+                filterbyname.sh include=t app=t in="$l2" names="$outfile".head out="$outfile".fastq.gz
+            fi
+        done < files.txt
+        rm "$outfile".tmp
+        rm "$outfile".head
+	rm files.txt
+    fi
+fi
+
+echo "Done"
