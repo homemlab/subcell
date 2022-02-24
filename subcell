@@ -8,9 +8,9 @@ contact: ricardo.santos@nms.unl.pt
 ------------------------------------------------
 "
 
-usage=$(echo -e "\nThis tool takes two positional arguments (no flags). 
-\nFirst argument is a file with the cell barcodes of interest.
-\nSecond argument is the folder containing the fastq.gz reads files")
+usage=$(echo "\n This tool takes two positional arguments (no flags). 
+\n First argument is a file with the cell barcodes of interest.
+\n Second argument is the folder containing the fastq.gz reads files")
 
 
 if ! [[ -f $1 ]]; then 
