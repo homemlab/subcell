@@ -8,7 +8,7 @@ contact: <ricardo.santos@nms.unl.pt>
 ## Intro
 This bash script was developed to extract cluster-specific reads from single-cell RNA sequencing data. These might be cell-type, subcell-type, or any other clustered cells in Seurat objects. In our case, cell barcodes were extracted using the WhichCells() function of Seurat package ([satijalab.org/seurat](https://link)).
 
-This program relies on two pieces of software previously developed for manipulating fastq reads with great performances. Namely, fqtools ([github.com/alastair-droop/fqtools](https://link)) and the `filterbyname.sh` script from the bbmap suite ([sourceforge.net/projects/bbmap](https://link)) .
+This program relies on two pieces of software previously developed for manipulating fastq reads with great performances. Namely, **fqtools** ([github.com/alastair-droop/fqtools](https://link)) and the `filterbyname.sh` script from the **bbmap** suite ([sourceforge.net/projects/bbmap](https://link)) .
 
 
 ## Installation
