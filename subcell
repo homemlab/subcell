@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-echo -e "$0 0.4
+echo -e "$0 0.5
 retrieve cell specific fastq reads from provided list of cell barcodes from single-cell RNA-seq data
 (e.g. retrieved using WhichCell function of Seurat R package)
 
@@ -8,6 +8,7 @@ contact: ricardo.santos@nms.unl.pt
 ------------------------------------------------
 "
 
+# USAGE STATEMENT
 usage="\n
 \$ bash subcell cell.barcodes folder_fastq/
 \n 
@@ -15,7 +16,7 @@ usage="\n
 \n  - First argument is a file with the cell barcodes of interest.
 \n  - Second argument is the folder containing the fastq.gz reads files"
 
-
+# TESTING ARGUMENTS
 if ! [[ -f $1 ]]; then 
     echo "WARNING: First argument is not a file" 
     echo -e $usage >&2; exit 1;
@@ -25,6 +26,15 @@ if ! [[ -d $2 ]]; then
     echo "WARNING: Second argument is not a directory"
     echo -e $usage >&2; exit 1;
 fi
+
+# ACTIVATING CONDA ENVIRONMENT
+CONDA_PATH=$(conda info | grep -i 'base environment' | awk '{print$(4)}')
+CONDA_SH=$CONDA_PATH'/etc/profile.d/conda.sh'
+
+source $CONDA_SH
+conda init $(echo $SHELL | awk -F'[/]' '{print$(NF)}') &> /dev/null
+conda activate subcell &> /dev/null
+
 
 # Input file with cell barcodes
 input=$(readlink -f $1)
@@ -69,4 +79,7 @@ else
     fi
 fi
 
-echo "Done"
+# DEACTIVATE CONDA ENVIRONMENT
+conda deactivate &> /dev/null
+
+echo "Reads belonging to the provided barcodes were written in "$2" using as "$outfile".fastq.gz"

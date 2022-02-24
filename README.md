@@ -1,7 +1,7 @@
 # Subcell
 Bash script to filter cluster-specific reads from scRNA-seq data.
 ---------
-version 0.4
+version 0.5
 
 contact <ricardo.santos@nms.unl.pt>
 ## Intro
@@ -15,8 +15,7 @@ Running the script requires Anaconda (or Miniconda) to be installed. If you run 
 ```console
 $ git clone https://github.com/homemlab/subcell.git
 $ cd subcell/
-$ conda env create -f env.yaml
-$ conda activate subcell
+$ bash install.sh
 ```
 ## Usage
 The script will take positional arguments (no flags). The first argument is a file containing the cell barcodes. In this case it is optimized for the following removing prefixes ending with `_` and sufixes starting with `-` as in the following 16bp barcode example:
