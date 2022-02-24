@@ -1,9 +1,10 @@
 # Subcell
 Bash script to filter cluster-specific reads from scRNA-seq data.
 ---------
-version 0.5
+version: 0.5
 
-contact <ricardo.santos@nms.unl.pt>
+contact: <ricardo.santos@nms.unl.pt>
+
 ## Intro
 This bash script was developed to extract cluster-specific reads from single-cell RNA sequencing data. These might be cell-type, subcell-type, or any other clustered cells in Seurat objects. In our case, cell barcodes were extracted using the WhichCells() function of Seurat package ([satijalab.org/seurat](https://link)).
 
