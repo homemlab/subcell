@@ -1,8 +1,10 @@
 # Subcell
-#### Bash script for extracting cell-type specific fastq reads using cell barcodes.
+Bash script for extracting cell-type specific fastq reads using cell barcodes.
+-----------
 version: 0.4
 contact: <ricardo.santos@nms.unl.pt>
 -----------
+
 ## Intro
 This bash script was developed to extract cluster-specific reads from single-cell RNA sequencing data. These might be cell-type, subcell-type, or any other clustered cells in Seurat objects. In our case, cell barcodes were extracted using the WhichCells() function of Seurat package ([satijalab.org/seurat](https://link)).
 
