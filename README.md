@@ -1,7 +1,7 @@
 # Subcell
-### Bash script for extracting cell-type specific fastq reads using cell barcodes.
-### version: 0.4
-### contact: <ricardo.santos@nms.unl.pt>
+#### Bash script for extracting cell-type specific fastq reads using cell barcodes.
+version: 0.4
+contact: <ricardo.santos@nms.unl.pt>
 -----------
 ## Intro
 This bash script was developed to extract cluster-specific reads from single-cell RNA sequencing data. These might be cell-type, subcell-type, or any other clustered cells in Seurat objects. In our case, cell barcodes were extracted using the WhichCells() function of Seurat package ([satijalab.org/seurat](https://link)).
@@ -25,8 +25,8 @@ The script will take positional arguments (no flags). The first argument is a fi
 $ bash subcell cell.barcodes folder_fastq/
 ```
 Positional arguments of subcell
-1. cell.barcodes - is the file containing all your barcodes of interest
-2. folder_fastq/ - is the path to the folder containing the fastq.gz files (files have to be compressed, it saves space)
+1. **cell.barcodes** - is the file containing all your barcodes of interest
+2. **folder_fastq/** - is the path to the folder containing the fastq.gz files (files have to be compressed, it saves space)
 
 The program will write the resulting cell.fastq.gz in the same input folder_fastq/
 
