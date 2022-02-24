@@ -15,12 +15,12 @@ Second argument is the folder containing the fastq.gz reads files")
 
 if ! [[ -f $1 ]]; then 
     echo "First argument is not a file" 
-    echo $usage
+    echo $usage >&2; exit 1;;
 fi
 
 if ! [[ -d $2 ]]; then
     echo "Second argument is not a directory"
-    echo $usage
+    echo $usage >&2; exit 1;;
 fi
 
 # Input file with cell barcodes
