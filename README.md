@@ -14,16 +14,17 @@ This program relies on two pieces of software previously developed for manipulat
 ## Installation
 Running the script requires Anaconda (or Miniconda) to be installed. If you run the following snippet everything should go fine:
 ```console
-\$ git clone https://github.com/homemlab/subcell.git
-\$ cd subcell/
-\$ bash install.sh
+#!/usr/bin/env bash
+git clone https://github.com/homemlab/subcell.git
+cd subcell/
+bash install.sh
 ```
 ## Usage
 The script will take positional arguments (no flags). The first argument is a file containing the cell barcodes. In this case it is optimized for the following removing prefixes ending with `_` and sufixes starting with `-` as in the following 16bp barcode example:
 `sample1_AACCTGCAAGGACTG-1` .
 
 ```console
-\$ bash subcell cell.barcodes folder_fastq/
+bash subcell cell.barcodes folder_fastq/
 ```
 Positional arguments of subcell
 1. **cell.barcodes** - is the file containing all your barcodes of interest
