@@ -64,12 +64,12 @@ else
         while read l
         do
             if ! [[ $(echo $l | grep -E '*_R1_*') == "" ]]; then
-                echo "Processing file:"
+                echo "Processing headers of provided barcodes:"
                 echo $(echo $l | awk -F'[/]' '{print$(NF)}')
                 fqtools find -f "$outfile".tmp "$l" | awk '/^@/ {print $0}' | sed 's/@//g' | sed 's/\ 1:/\ 2:/g' > "$outfile".head
                 wait
                 l2=$(echo $l | sed 's/_R1_/_R2_/g')
-                echo "Processing file:"
+                echo "Processing reads:"
                 echo $(echo $l2 | awk -F'[/]' '{print$(NF)}')
                 filterbyname.sh include=t app=t in="$l2" names="$outfile".head out="$outfile".fastq.gz &> /dev/null
             fi
