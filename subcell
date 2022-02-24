@@ -1,12 +1,27 @@
 #!/usr/bin/env bash
 
-echo -e "$0 0.3
+echo -e "$0 0.4
 retrieve cell specific fastq reads from provided list of cell barcodes from single-cell RNA-seq data
 (e.g. retrieved using WhichCell function of Seurat R package)
 
 contact: ricardo.santos@nms.unl.pt
 ------------------------------------------------
 "
+
+usage=$(echo -e "This tool takes two positional arguments (no flags). 
+First argument is a file with the cell barcodes of interest.
+Second argument is the folder containing the fastq.gz reads files")
+
+
+if ! [[ -f $1 ]]; then 
+    echo "First argument is not a file" 
+    echo $usage
+fi
+
+if ! [[ -d $2 ]]; then
+    echo "Second argument is not a directory"
+    echo $usage
+fi
 
 # Input file with cell barcodes
 input=$(readlink -f $1)
