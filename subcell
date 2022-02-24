@@ -8,7 +8,7 @@ contact: ricardo.santos@nms.unl.pt
 ------------------------------------------------
 "
 
-usage=$(echo -e "\$ bash subcell cell.barcodes folder_fastq/
+usage="\$ bash subcell cell.barcodes folder_fastq/
 \n This tool takes two positional arguments (no flags). 
 \n First argument is a file with the cell barcodes of interest.
 \n Second argument is the folder containing the fastq.gz reads files")
@@ -16,12 +16,12 @@ usage=$(echo -e "\$ bash subcell cell.barcodes folder_fastq/
 
 if ! [[ -f $1 ]]; then 
     echo "First argument is not a file" 
-    echo $usage >&2; exit 1;
+    echo -e $usage >&2; exit 1;
 fi
 
 if ! [[ -d $2 ]]; then
     echo "Second argument is not a directory"
-    echo $usage >&2; exit 1;
+    echo -e $usage >&2; exit 1;
 fi
 
 # Input file with cell barcodes
