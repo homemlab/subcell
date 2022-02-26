@@ -5,10 +5,10 @@ version: 0.5
 contact: <ricardo.santos@nms.unl.pt>
 
 ## Index
-[Introduction](## Intro)
-[Installation](## Installation)
-[Usage](## Usage)
-[Issues](## Issues)
+1. [Introduction](## Intro)
+2. [Installation](## Installation)
+3. [Usage](## Usage)
+4. [Issues](## Issues)
 
 
 ## Intro
