@@ -2,17 +2,24 @@
 Bash script to filter cluster-specific reads from scRNA-seq data.
 ---------
 version: 0.5
-
 contact: <ricardo.santos@nms.unl.pt>
 
-## Intro
-This bash script was developed to extract cluster-specific reads from single-cell RNA sequencing data. These might be cell-type, subcell-type, or any other cell cluster in Seurat objects. In our case, cell barcodes were extracted using the WhichCells() function of Seurat package ([satijalab.org/seurat](https://link)).
+## Index
+[Introduction](## Intro)
+[Installation](## Installation)
+[Usage](## Usage)
+[Issues](## Issues)
 
-This program relies on two pieces of software previously developed for manipulating fastq reads with great performances. Namely, **fqtools** ([github.com/alastair-droop/fqtools](https://link)) and the `filterbyname.sh` script from the **bbmap** suite ([sourceforge.net/projects/bbmap](https://link)) .
+
+## Intro
+This bash script was developed to extract cluster-specific reads from single-cell RNA sequencing data. These might be cell-type, subcell-type, or any other cell cluster in Seurat objects. In our case, cell barcodes were extracted using the WhichCells() function of Seurat package ([satijalab.org/seurat](https://satijalab.org/seurat)).
+
+This program relies on two pieces of software previously developed for manipulating fastq reads with great performances. Namely, **fqtools** ([github.com/alastair-droop/fqtools](https://github.com/alastair-droop/fqtools)) and the `filterbyname.sh` script from the **bbmap** suite ([sourceforge.net/projects/bbmap](https://sourceforge.net/projects/bbmap)) .
 
 
 ## Installation
-Running the script requires Anaconda (or Miniconda) to be installed. If you run the following snippet everything should go fine:
+Running the script requires Anaconda (or Miniconda) to be installed. If you haven't already, download ([here](https://www.anaconda.com/products/individual)) and install it.
+Then run the following snippet on your terminal:
 ```console
 #!/usr/bin/env bash
 git clone https://github.com/homemlab/subcell.git
@@ -35,4 +42,4 @@ Positional arguments of subcell
 The program will write the resulting cell.fastq.gz in the same input directory folder_fastq/
 
 ## Issues
-Please contact <ricardo.santos@nms.unl.pt>
+Please open an issue or contact <ricardo.santos@nms.unl.pt>
