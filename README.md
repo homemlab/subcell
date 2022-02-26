@@ -1,7 +1,8 @@
 # Subcell
-Bash script to filter cluster-specific reads from scRNA-seq data.
+### Bash script to filter cluster-specific reads from scRNA-seq data.
 ---------
 version: 0.5
+
 contact: <ricardo.santos@nms.unl.pt>
 
 ## Index
