@@ -19,7 +19,8 @@ This program relies on two pieces of software previously developed for manipulat
 
 
 ## Installation
-Running the script requires Anaconda (or Miniconda) to be installed. If you haven't already, download ([here](https://www.anaconda.com/products/individual)) and install it.
+Running the script requires Anaconda (or Miniconda) to be installed.
+The `install.sh` script will install the latest Linux-x86_64 Anaconda release for you. In case you need a different version go ([here](https://www.anaconda.com/products/individual)) and install it.
 Then run the following snippet on your terminal:
 ```console
 #!/usr/bin/env bash
@@ -43,4 +44,4 @@ Positional arguments of subcell
 The program will write the resulting cell.fastq.gz in the same input directory folder_fastq/
 
 ## Issues
-Please open an issue or contact <ricardo.santos@nms.unl.pt>
+Please open a github issue or contact <ricardo.santos@nms.unl.pt>
