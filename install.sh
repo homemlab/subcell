@@ -5,10 +5,10 @@ echo "Preparing"
 if [ -x "$(command -v conda)" ]; then
   echo 'Anaconda is already installed!'
 else
-  curl -fsSL -o anaconda_install.sh "https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh"
-  echo 'Installing Anaconda'
-  bash anaconda_install.sh -b
-  rm anaconda_install.sh
+  curl -fsSL -o miniconda_install.sh "https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh"
+  echo 'Installing Miniconda'
+  bash miniconda_install.sh -b
+  rm miniconda_install.sh
   echo 'Anaconda successfully installed'
 fi
 source ~/.bash_profile >& /dev/null

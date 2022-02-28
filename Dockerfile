@@ -25,6 +25,6 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 
 RUN ["bash", "-c", "/bin/app/install.sh"]
 
-ENV PATH=$PATH:/root/miniconda3/bin
+ENV PATH=$PATH:/root/miniconda3/bin:/bin/app/subcell
 
 CMD ["bash", "subcell"]
