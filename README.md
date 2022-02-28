@@ -8,8 +8,8 @@ contact: <ricardo.santos@nms.unl.pt>
 ## Index
 1. [Introduction](#Intro)
 2. [Installation](#Installation)
-    - [Docker](#Docker-image)
-    - [Anaconda](#Anaconda-environmetn)
+    - [Docker iamge](#Docker-image)
+    - [Anaconda environment](#Anaconda-environment)
 3. [Usage](#Usage)
     - [Docker](#Docker)
     - [Anaconda](#Anaconda)
