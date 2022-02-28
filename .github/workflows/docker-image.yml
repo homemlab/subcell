@@ -7,29 +7,26 @@ on:
     branches: [ main ]
 
 jobs:
-  push_to_registry:
-    name: Push Docker image to Docker Hub
+
+  build:
+
     runs-on: ubuntu-latest
+
     steps:
-      - name: Check out the repo
-        uses: actions/checkout@v2
+    - uses: actions/checkout@v2
+    
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag rfcdsantos/subcell:$(date +'%Y-%m-%d')
       
-      - name: Log in to Docker Hub
-        uses: docker/login-action
-        with:
-          username: ${{ secrets.RICARDO_DOCKER_USER }}
-          password: ${{ secrets.RICARDO_DOCKER_PASS }}
+    - name: Log in to Docker Hub
+      uses: docker/login-action
+      with:
+        username: ${{ secrets.RICARDO_DOCKER_USER }}
+        password: ${{ secrets.RICARDO_DOCKER_PASS }}
       
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action
-        with:
-          images: rfcdsantos/subcell
-      
-      - name: Build and push Docker image
-        uses: docker/build-push-action
-        with:
-          context: .
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+    - name: Push the Docker image to registry
+      run: docker push rfcdsantos/subcell:$(date +'%Y-%m-%d')
+    - name: Re-tag this as the latest Docker image
+      run: docker image tag rfcdsantos/subcell:$(date +'%Y-%m-%d') rfcdsantos/subcell:latest
+    - name: Push current image as latest
+      run: docker push rfcdsantos/subcell:latest
