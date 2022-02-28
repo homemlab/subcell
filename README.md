@@ -1,8 +1,9 @@
-![subcell](https://github.com/homemlab/subcell/blob/main/.static/subcell.png?raw=true)  | # Subcell
+![subcell](https://github.com/homemlab/subcell/blob/main/.static/subcell.png?raw=true) | # Subcell
+:---:|:---:
 
 Bash script to filter cluster-specific reads from scRNA-seq data.
-version: 0.5.3
-contact: <ricardo.santos@nms.unl.pt>
+- version: 0.5.3
+- contact: <ricardo.santos@nms.unl.pt>
 
 ## Index
 1. [Introduction](#Intro)
