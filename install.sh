@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+
 echo "Preparing"
 # Install Anaconda (Modified to install latest 64bit Linux Anaconda release - https://stackoverflow.com/questions/48230953/permanent-link-to-latest-anaconda)
 if [ -x "$(command -v conda)" ]; then
