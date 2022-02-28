@@ -55,7 +55,7 @@ The program will write the resulting `cell.fastq.gz` in the same input directory
 ### Docker
 To use the latest `subcell` Docker image simply use run:
 ```bash
-docker run --rm -v ${PWD}:/data rfcdsantos/sbucell bash subcell /data/cell.barcodes /data/folder_fastq/
+docker run --rm -v ${PWD}:/data rfcdsantos/subcell bash subcell /data/cell.barcodes /data/folder_fastq/
 ```
 
 ### Anaconda
