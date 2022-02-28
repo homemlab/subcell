@@ -15,10 +15,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag rfcdsantos/subcell:$(date +%s)
+      run: docker build . --file Dockerfile --tag rfcdsantos/subcell:$(date +'%Y-%m-%d')
     - name: Push the Docker image to registry
-      run: docker push rfcdsantos/subcell:$(date +%s)
+      run: docker push rfcdsantos/subcell:$(date +'%Y-%m-%d')
     - name: Re-tag this as the latest Docker image
-      run: docker image tag rfcdsantos/subcell:$(date +%s) rfcdsantos/subcell:latest
+      run: docker image tag rfcdsantos/subcell:$(date +'%Y-%m-%d') rfcdsantos/subcell:latest
     - name: Push current image as latest
       run: docker push rfcdsantos/subcell:latest
