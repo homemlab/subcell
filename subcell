@@ -2,7 +2,7 @@
 
 echo -e "$0 0.5
 retrieve cell specific fastq reads from provided list of cell barcodes from single-cell RNA-seq data
-(e.g. retrieved using WhichCell function of Seurat R package)
+(e.g. retrieved using WhichCells() function of Seurat R package)
 
 contact: ricardo.santos@nms.unl.pt
 ------------------------------------------------
