@@ -5,17 +5,15 @@ echo "Preparing"
 if [ -x "$(command -v conda)" ]; then
   echo 'Anaconda is already installed!'
 else
-  curl -fsSL -o anaconda_repo.tmp "https://repo.continuum.io/archive/"
-  RELEASE=$(cat anaconda_repo.tmp | grep Anaconda3 | grep Linux | awk 'END{print}' | sed 's/^.*"\(.*\)".*$/\1/')
-  echo 'Downloading Anaconda...'
-  curl -fSL -o anaconda_install.sh "https://repo.continuum.io/archive/$RELEASE"
+  curl -fsSL -o anaconda_install.sh "https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh"
   echo 'Installing Anaconda'
   bash anaconda_install.sh -b
-  rm anaconda_*.sh
+  rm anaconda_install.sh
   echo 'Anaconda successfully installed'
 fi
 source ~/.bash_profile >& /dev/null
 source ~/.bashrc >& /dev/null
+export PATH=$PATH:/root/miniconda3/bin
 
 unset CONDA_OVERRIDE_GLIBC
 
