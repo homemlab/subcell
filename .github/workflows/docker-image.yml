@@ -1,0 +1,24 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag rfcdsantos/subcell:$(date +%s)
+    - name: Push the Docker image to registry
+      run: docker push rfcdsantos/subcell:$(date +%s)
+    - name: Re-tag this as the latest Docker image
+      run: docker image tag rfcdsantos/subcell:$(date +%s) rfcdsantos/subcell:latest
+    - name: Push current image as latest
+      run: docker push rfcdsantos/subcell:latest
