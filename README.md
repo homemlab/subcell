@@ -59,7 +59,7 @@ docker run --rm -v ${PWD}:/data rfcdsantos/subcell bash subcell /data/cell.barco
 ```
 
 ### Anaconda
-To use a local Anaconda environemtn, run directly from the subcell folder:
+To use a local Anaconda environment, run directly from the subcell folder:
 
 ```bash
 bash subcell cell.barcodes folder_fastq/
