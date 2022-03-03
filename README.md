@@ -8,7 +8,7 @@ Bash script to filter cluster-specific reads from scRNA-seq data.
 ## Index
 1. [Introduction](#Intro)
 2. [Installation](#Installation)
-    - [Docker iamge](#Docker-image)
+    - [Docker image](#Docker-image)
     - [Anaconda environment](#Anaconda-environment)
 3. [Usage](#Usage)
     - [Docker](#Docker)
