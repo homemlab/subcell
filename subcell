@@ -74,15 +74,16 @@ for i in $(cat "$outfile".tmp); do
                     l2=$(echo $l | sed 's/_R1_/_R2_/g')
                     echo "Processing reads:"
                     echo $(echo $l2 | awk -F'[/]' '{print$(NF)}')
-                    filterbyname.sh include=t app=t in="$l2" names="$i".head out="$outfile"_"$count".fastq.gz &> /dev/null
+                    filterbyname.sh include=t app=t in="$l2" names="$i".head out="$outfile"_"$count"_"$i".fastq.gz &> /dev/null
                 fi
             done < files.txt
-            rm "$outfile".tmp
-            rm "$outfile".head
-        rm files.txt
+            rm "$i".head
         fi
     fi
+count=$((count+1))
 done
+
+rm files.txt
 
 # DEACTIVATE CONDA ENVIRONMENT
 conda deactivate &> /dev/null
