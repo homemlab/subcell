@@ -41,8 +41,8 @@ CONDA_PATH=$(conda info | grep -i 'base environment' | awk '{print$(4)}')
 CONDA_SH=$CONDA_PATH'/etc/profile.d/conda.sh'
 
 source $CONDA_SH
-conda init $(echo $SHELL | awk -F'[/]' '{print$(NF)}') &> /dev/null
-conda activate subcell &> /dev/null
+conda init $(echo $SHELL | awk -F'[/]' '{print$(NF)}') &> cmd.out
+conda activate subcell &> cmd.out
 
 # Input file with cell barcodes
 input=$(readlink -f $1)
@@ -82,7 +82,7 @@ for i in $(cat "$outfile".tmp); do
                     l2=$(echo $l | sed 's/_R1_/_R2_/g')
                     echo "Processing reads:"
                     echo $(echo $l2 | awk -F'[/]' '{print$(NF)}')
-                    filterbyname.sh include=t app=t in="$l2" names="$i".head out="$outfile"_"$count"_"$i".fastq.gz &> /dev/null
+                    filterbyname.sh include=t app=t in="$l2" names="$i".head out="$outfile"_"$count"_"$i".fastq.gz &> cmd.out
                 fi
             done < files.txt
             rm "$i".head
@@ -94,6 +94,6 @@ done
 rm files.txt
 
 # DEACTIVATE CONDA ENVIRONMENT
-conda deactivate &> /dev/null
-
+conda deactivate &> cmd.out
+rm cmd.out
 echo "Reads belonging to the provided barcodes were written in "$2" using as "$outfile".fastq.gz"
