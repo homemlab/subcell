@@ -57,12 +57,12 @@ dir=$(readlink -f $2)
 # sample{1,2}-<Barcode>_1
 # The following sed commands remove the non nucleotide info
 
-sed 's/^.*\(_.*-\).*$/\1/' $input | sed 's/-\|_//g' > "$outfile".tmp
+awk -F'[_]' '{print$2}' $input | awk -F'[-]' '{print$1}' > "$outpath"/"$outfile".tmp
 
 # Extract reads that belong to the cell barcode
 
-readlink -f $(ls $dir/*R1*.fastq.gz) > R1files.txt
-readlink -f $(ls $dir/*R2*.fastq.gz) > R2files.txt
+ls $dir/*R1*.fastq.gz > R1files.txt
+ls $dir/*R2*.fastq.gz > R2files.txt
 
 count=1
 total_barcodes=$(cat "$outfile".tmp | wc -l)
