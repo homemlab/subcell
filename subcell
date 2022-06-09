@@ -60,15 +60,15 @@ sed 's/^.*\(_.*-\).*$/\1/' $input | sed 's/-\|_//g' > "$outfile".tmp
 
 # Extract reads that belong to the cell barcode
 
-readlink -f $(ls *.fastq.gz) > files.txt
+readlink -f $(ls $dir/*.fastq.gz) > files.txt
 count=0
 for i in $(cat "$outfile".tmp); do
     echo $i > "$i".txt
-    if [[ $(ls *.fastq.gz | wc -l) == 0 ]]; then
+    if [[ $(ls $dir/*.fastq.gz | wc -l) == 0 ]]; then
         echo -e "Directory does not contain the required R1/R2 read files.
         Please provide the correct directory or make sure .fastq.gz files are compressed"
     else
-        if [[ $(ls *.fastq.gz | grep -E '*_R(1|2)_*' | wc -l) == 0 ]]; then
+        if [[ $(ls $dir/*.fastq.gz | grep -E '*_R(1|2)_*' | wc -l) == 0 ]]; then
             echo -e "Directory does not contain the required R1/R2 read files.
             Please provide the correct directory or make sure .fastq.gz files are compressed"
         else
