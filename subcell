@@ -37,11 +37,11 @@ if [[ -z $threads || $threads -lt 1 ]]; then
 fi
 
 # ACTIVATING CONDA ENVIRONMENT
-CONDA_PATH=$(conda info | grep -i 'base environment' | awk '{print$(4)}')
-CONDA_SH=$CONDA_PATH'/etc/profile.d/conda.sh'
+# CONDA_PATH=$(conda info | grep -i 'base environment' | awk '{print$(4)}')
+# CONDA_SH=$CONDA_PATH'/etc/profile.d/conda.sh'
 
-source $CONDA_SH
-conda init $(echo $SHELL | awk -F'[/]' '{print$(NF)}') &> cmd.out
+# source $CONDA_SH
+# conda init $(echo $SHELL | awk -F'[/]' '{print$(NF)}') &> cmd.out
 conda activate subcell &> cmd.out
 
 # Input file with cell barcodes
