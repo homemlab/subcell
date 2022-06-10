@@ -42,7 +42,7 @@ fi
 # CONDA_SH=$CONDA_PATH'/etc/profile.d/conda.sh'
 
 # source $CONDA_SH
-# conda init $(echo $SHELL | awk -F'[/]' '{print$(NF)}') &> cmd.out
+conda init $(echo $SHELL | awk -F'[/]' '{print$(NF)}') &> cmd.out
 conda activate subcell &> cmd.out
 
 # Input file with cell barcodes
