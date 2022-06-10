@@ -82,7 +82,7 @@ for i in $(cat "$outfile".tmp); do
                     l2=$(echo $l | sed 's/_R1_/_R2_/g')
                     echo "Processing reads:"
                     echo $(echo $l2 | awk -F'[/]' '{print$(NF)}')
-                    filterbyname.sh include=t app=t in="$l2" names="$i".head out="$outfile"_"$count"_"$i".fastq.gz &> cmd.out
+                    filterbyname.sh include=t app=t in="$l2" names="$i".head out=stdout.fq.gz >> "$outfile"_"$count"_"$i".fastq.gz
                 fi
             done < files.txt
             rm "$i".head
