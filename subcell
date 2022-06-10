@@ -27,28 +27,20 @@ if ! [[ -d $2 ]]; then
     echo -e $usage >&2; exit 1;
 fi
 
-outpath=$3
-mkdir -p $outpath
-cd $outpath
-
-threads=$4
-if [[ -z $threads || $threads -lt 1 ]]; then
-    threads=1
-fi
-
 # ACTIVATING CONDA ENVIRONMENT
-# CONDA_PATH=$(conda info | grep -i 'base environment' | awk '{print$(4)}')
-# CONDA_SH=$CONDA_PATH'/etc/profile.d/conda.sh'
+CONDA_PATH=$(conda info | grep -i 'base environment' | awk '{print$(4)}')
+CONDA_SH=$CONDA_PATH'/etc/profile.d/conda.sh'
 
-# source $CONDA_SH
-conda init $(echo $SHELL | awk -F'[/]' '{print$(NF)}') &> cmd.out
-conda activate subcell &> cmd.out
+source $CONDA_SH
+conda init $(echo $SHELL | awk -F'[/]' '{print$(NF)}') &> /dev/null
+conda activate subcell &> /dev/null
 
 # Input file with cell barcodes
 input=$(readlink -f $1)
 outfile=$(echo $1 | awk -F'[/]' '{print$(NF)}' | sed 's/\(.*\)\..*/\1/')
 # Directory with the I1 R1 R2 fastq read files
 dir=$(readlink -f $2)
+cd $dir
 
 # Get cell barcodes (CB)
 # This is from our special case scRNA-seq experiment.
@@ -56,45 +48,40 @@ dir=$(readlink -f $2)
 # sample{1,2}-<Barcode>_1
 # The following sed commands remove the non nucleotide info
 
-awk -F'[_]' '{print$2}' $input | awk -F'[-]' '{print$1}' > "$outpath"/"$outfile".tmp
+sed 's/^.*\(_.*-\).*$/\1/' $input | sed 's/-\|_//g' > "$outfile".tmp
 
 # Extract reads that belong to the cell barcode
 
-ls $dir/*.fastq.gz > files.txt
-count=0
-for i in $(cat "$outfile".tmp); do
-    echo $i > "$i".txt
-    if [[ $(ls $dir/*.fastq.gz | wc -l) == 0 ]]; then
+readlink -f $(ls *.fastq.gz) > files.txt
+if [[ $(ls *.fastq.gz | wc -l) == 0 ]]; then
+    echo -e "Directory does not contain the required R1/R2 read files.
+    Please provide the correct directory or make sure .fastq.gz files are compressed"
+else
+    if [[ $(ls *.fastq.gz | grep -E '*_R(1|2)_*' | wc -l) == 0 ]]; then
         echo -e "Directory does not contain the required R1/R2 read files.
         Please provide the correct directory or make sure .fastq.gz files are compressed"
     else
-        if [[ $(ls $dir/*.fastq.gz | grep -E '*_R(1|2)_*' | wc -l) == 0 ]]; then
-            echo -e "Directory does not contain the required R1/R2 read files.
-            Please provide the correct directory or make sure .fastq.gz files are compressed"
-        else
-            while read l
-            do
-                if ! [[ $(echo $l | grep -E '*_R1_*') == "" ]]; then
-                    echo "Processing headers of provided barcodes:"
-                    echo $(echo $l | awk -F'[/]' '{print$(NF)}')
-                    fqtools find -f "$i".txt "$l" | awk '/^@/ {print $0}' | sed 's/@//g' | sed 's/\ 1:/\ 2:/g' >> "$i".head
-                    wait
-                    l2=$(echo $l | sed 's/_R1_/_R2_/g')
-                    echo "Processing reads:"
-                    echo $(echo $l2 | awk -F'[/]' '{print$(NF)}')
-                    filterbyname.sh include=t app=t in="$l2" names="$i".head out=stdout.fq.gz >> "$outfile"_"$count"_"$i".fastq.gz
-                fi
-            done < files.txt
-            rm "$i".head
-        fi
+        while read l
+        do
+            if ! [[ $(echo $l | grep -E '*_R1_*') == "" ]]; then
+                echo "Processing headers of provided barcodes:"
+                echo $(echo $l | awk -F'[/]' '{print$(NF)}')
+                fqtools find -f "$outfile".tmp "$l" | awk '/^@/ {print $0}' | sed 's/@//g' | sed 's/\ 1:/\ 2:/g' > "$outfile".head
+                wait
+                l2=$(echo $l | sed 's/_R1_/_R2_/g')
+                echo "Processing reads:"
+                echo $(echo $l2 | awk -F'[/]' '{print$(NF)}')
+                filterbyname.sh include=t app=t in="$l2" names="$outfile".head out="$outfile".fastq &> /dev/null
+            fi
+        done < files.txt
+        rm "$outfile".tmp
+        rm "$outfile".head
+        gzip "$outfile".fastq
+	rm files.txt
     fi
-rm "$i".txt
-count=$((count+1))
-done
-
-rm files.txt
+fi
 
 # DEACTIVATE CONDA ENVIRONMENT
-conda deactivate &> cmd.out
-rm cmd.out
+conda deactivate &> /dev/null
+
 echo "Reads belonging to the provided barcodes were written in "$2" using as "$outfile".fastq.gz"

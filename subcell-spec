@@ -83,7 +83,8 @@ for i in $(cat "$outfile".tmp); do
             cat "$outpath"/"$i".tmp | awk '/^@/ {print substr($0,2); }' | sed 's/\ 1:/\ 2:/g' > "$outpath"/"$i".head
             rm "$i".tmp
             wait
-            parallel -k --lb -j $threads -a R2files.txt filterbyname.sh include=t app=t in={} names="$i".head out=stdout.fq.gz >> "$outfile"_"$count"_"$i".fastq.gz
+            parallel -k --lb -j $threads -a R2files.txt filterbyname.sh include=t app=t in={} names="$i".head out=stdout >> "$outfile"_"$count"_"$i".fastq
+            gzip "$outfile"_"$count"_"$i".fastq
             rm "$i".head
         fi
     fi
