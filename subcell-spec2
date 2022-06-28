@@ -57,7 +57,7 @@ dir=$(readlink -f $2)
 # sample{1,2}-<Barcode>_1
 # The following sed commands remove the non nucleotide info
 
-awk -F'[_]' '{print$2}' $input | awk -F'[-]' '{print$1}' > "$outpath"/"$outfile".tmp
+awk -F'[_]' '{print$2}' $input | awk -F'[-]' '{print$1}' > "$outpath"/"$outfile"_barcodes.tmp
 
 # Extract reads that belong to the cell barcode
 
@@ -96,5 +96,5 @@ gzip -r "$outpath"
 # DEACTIVATE CONDA ENVIRONMENT
 conda deactivate &> cmd.out
 rm cmd.out
-echo "Reads belonging to the provided barcodes were written in "$2" using as "$outfile".fastq.gz"
+echo "Reads belonging to the provided barcodes were written in "$outpath"/"$outfile" with the format: "$outfile"_<barcode>.fastq.gz"
 exit 1
